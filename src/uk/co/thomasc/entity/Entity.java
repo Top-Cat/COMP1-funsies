@@ -4,8 +4,9 @@ import java.util.List;
 import java.util.Random;
 
 import uk.co.thomasc.Main;
+import uk.co.thomasc.Screen;
 
-public class Entity {
+public abstract class Entity {
 	
 	private int x;
 	private int y;
@@ -39,5 +40,7 @@ public class Entity {
 	public int getY() {
 		return y;
 	}
+
+	public abstract void draw(Screen screen);
 	
 }

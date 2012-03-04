@@ -1,5 +1,7 @@
 package uk.co.thomasc.entity;
 
+import uk.co.thomasc.Main;
+import uk.co.thomasc.Screen;
 import uk.co.thomasc.menu.Game;
 
 public class Monster extends Entity {
@@ -30,6 +32,13 @@ public class Monster extends Entity {
 		}
 		if (getX() == player.getX() && getY() == player.getY()) {
 			System.out.println("nom nom nom");
+		}
+	}
+
+	@Override
+	public void draw(Screen screen) {
+		if (awake) {
+			screen.drawTexture(128, 0, 64, 64, Main.padding + getX() * Main.tileSize, Main.padding + getY() * Main.tileSize, 64, 64);
 		}
 	}
 }

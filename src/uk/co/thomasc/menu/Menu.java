@@ -2,32 +2,29 @@ package uk.co.thomasc.menu;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
+
+import uk.co.thomasc.Screen;
 
 public enum Menu {
-	GAME((byte) 49, "Start new game", Game.class);
+	GAME(Game.class, 22),
+	TRAIN(Game.class, 25),
+	ABOUT(About.class, 29);
 	
-	private String menuText;
-	private Class<? extends MenuChoice> clazz;
-	private byte id;
+	private Class<? extends Screen> clazz;
+	private int width;
 	
-	private Menu(byte id, String menuText, Class<? extends MenuChoice> clazz) {
-		this.menuText = menuText;
+	private Menu(Class<? extends Screen> clazz, int width) {
 		this.clazz = clazz;
-		this.id = id;
-	}
-
-	public String getText() {
-		return menuText;
+		this.width = width;
 	}
 	
-	private byte getId() {
-		return id;
+	public int getWidth() {
+		return width;
 	}
 	
-	public MenuChoice createNew() {
+	public Screen createNew() {
 		try {
-			Constructor<? extends MenuChoice> c = clazz.getDeclaredConstructor(new Class[] {});
+			Constructor<? extends Screen> c = clazz.getDeclaredConstructor(new Class[] {});
 			return c.newInstance();
 		} catch (SecurityException e) {
 			e.printStackTrace();
@@ -43,18 +40,6 @@ public enum Menu {
 			e.printStackTrace();
 		}
 		return null;
-	}
-	
-	private static HashMap<Byte, Menu> map = new HashMap<Byte, Menu>();
-
-	static {
-		for (Menu ch : values()) {
-			map.put(ch.getId(), ch);
-		}
-	}
-
-	public static Menu getFromId(byte id) {
-		return map.get(id);
 	}
 	
 }
