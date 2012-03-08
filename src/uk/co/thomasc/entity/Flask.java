@@ -1,18 +1,20 @@
 package uk.co.thomasc.entity;
 
-import java.util.List;
-
+import uk.co.thomasc.Main;
 import uk.co.thomasc.Screen;
+import uk.co.thomasc.menu.Game;
 
 public class Flask extends Entity {
 	
-	public Flask(List<Entity> entities) {
-		randomisePosition(entities);
+	public Flask() {
+		randomisePosition();
 	}
 
 	@Override
 	public void draw(Screen screen) {
-		//The flask is invisible
+		if (((Game) screen).trainingMode) {
+			screen.drawTexture(96, 0, 32, 32, Main.padding + getX() * Main.tileSize, Main.padding + getY() * Main.tileSize, 64, 64);
+		}
 	}
 	
 }

@@ -1,5 +1,9 @@
 package uk.co.thomasc.entity;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.util.List;
+
 import uk.co.thomasc.Main;
 import uk.co.thomasc.Screen;
 
@@ -27,5 +31,17 @@ public class Player extends Entity {
 	@Override
 	public void draw(Screen screen) {
 		screen.drawTexture(sprite * 32, 32, 32, 32, Main.padding + getX() * Main.tileSize, Main.padding + getY() * Main.tileSize, 64, 64);
+	}
+	
+	@Override
+	public void save(BufferedWriter out) throws IOException {
+		super.save(out);
+		out.write(sprite + "\n");
+	}
+	
+	@Override
+	public void restore(List<String> in) {
+		super.restore(in);
+		sprite = Integer.parseInt(in.remove(0));
 	}
 }

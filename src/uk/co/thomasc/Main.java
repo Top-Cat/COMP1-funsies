@@ -9,8 +9,8 @@ import uk.co.thomasc.menu.MenuScreen;
 
 public class Main {
 	
-	public static int xLen = 9;
-	public static int yLen = 6;
+	public static int xLen = 7;
+	public static int yLen = 5;
 	public static int tileSize = 64;
 	public static int padding = 20;
 	
@@ -18,6 +18,8 @@ public class Main {
 	public static int screenHeight;
 	
 	public static Screen currentScreen;
+	
+	private static GameState gamestate;
 	
 	public static void main(String[] args) {
 		try {
@@ -40,6 +42,14 @@ public class Main {
 		}
 		
 		Display.destroy();
+	}
+	
+	public static void setGamestate(GameState gamestate) {
+		Main.gamestate = gamestate;
+	}
+	
+	public static GameState getGamestate() {
+		return gamestate;
 	}
 	
 	private static void GLinit() {

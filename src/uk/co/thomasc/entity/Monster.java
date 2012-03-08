@@ -1,26 +1,24 @@
 package uk.co.thomasc.entity;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.util.List;
+
 import uk.co.thomasc.Main;
 import uk.co.thomasc.Screen;
 import uk.co.thomasc.menu.Game;
 
 public class Monster extends Entity {
 	public boolean awake;
-	private int cycles = 0;
+	//private int cycles = 0;
 	
 	public void move(Player player) {
-		if (cycles++ > 3) {
-			cycles = 0;
-			randomisePosition(Game.getInstance().entities);
-			awake = false;
-		} else {
-			moveP();
-			moveP();
-		}
+		moveP();
+		moveP();
 	}
 	
 	private void moveP() {
-		Player player = Game.getInstance().player;
+		Player player = Main.getGamestate().getPlayer();
 		if (getY() < player.getY()) {
 			move(0, 1);
 		} else if (getY() > player.getY()) {
@@ -31,14 +29,27 @@ public class Monster extends Entity {
 			move(-1, 0);
 		}
 		if (getX() == player.getX() && getY() == player.getY()) {
-			System.out.println("nom nom nom");
+			Game.getInstance().toast.setData("Game Over!", 128, 0, 64);
+			Game.getInstance().toast.show();
 		}
 	}
 
 	@Override
 	public void draw(Screen screen) {
-		if (awake) {
+		if (awake || ((Game) screen).trainingMode) {
 			screen.drawTexture(128, 0, 64, 64, Main.padding + getX() * Main.tileSize, Main.padding + getY() * Main.tileSize, 64, 64);
 		}
+	}
+
+	@Override
+	public void save(BufferedWriter out) throws IOException {
+		super.save(out);
+		out.write((awake ? 1 : 0) + "\n");
+	}
+	
+	@Override
+	public void restore(List<String> in) {
+		super.restore(in);
+		awake = in.remove(0).equals("1");
 	}
 }

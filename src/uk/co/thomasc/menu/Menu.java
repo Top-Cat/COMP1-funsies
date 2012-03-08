@@ -6,20 +6,29 @@ import java.lang.reflect.InvocationTargetException;
 import uk.co.thomasc.Screen;
 
 public enum Menu {
-	GAME(Game.class, 22),
-	TRAIN(Game.class, 25),
-	ABOUT(About.class, 29);
+	GAME(NewGame.class, "Play", false),
+	TRAIN(TrainingGame.class, "Train", false),
+	RESUME(Game.class, "Resume", true),
+	SAVE(Save.class, "Save", true),
+	LOAD(Load.class, "Load", false),
+	ABOUT(About.class, "About", false);
 	
 	private Class<? extends Screen> clazz;
-	private int width;
+	private String text;
+	private boolean requiresGS;
 	
-	private Menu(Class<? extends Screen> clazz, int width) {
+	private Menu(Class<? extends Screen> clazz, String text, boolean requiresGS) {
 		this.clazz = clazz;
-		this.width = width;
+		this.text = text;
+		this.requiresGS = requiresGS;
 	}
 	
-	public int getWidth() {
-		return width;
+	public boolean requiresGS() {
+		return requiresGS;
+	}
+	
+	public String getText() {
+		return text;
 	}
 	
 	public Screen createNew() {
