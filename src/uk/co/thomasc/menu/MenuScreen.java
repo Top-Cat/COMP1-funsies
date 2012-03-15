@@ -21,7 +21,7 @@ public class MenuScreen extends Screen {
 		
 		//Menu options
 		int i = 0;
-		for (Menu menu : Menu.values()) {
+		for (Menu menu : Menu.values) {
 			if (i == selected) {
 				drawTexture(192, 0, 11, 14, Main.screenWidth / 2 - getTextWidth(menu.getText(), 4) / 2 - 20, Main.screenHeight / 2 + (i * 35) - 38, 11, 14);
 			}
@@ -36,20 +36,20 @@ public class MenuScreen extends Screen {
 			if (Keyboard.getEventKeyState()) {
 				if (Keyboard.getEventKey() == Keyboard.KEY_W) {
 					for (int i = selected - 1; i >= 0; i--) {
-						if (!Menu.values()[i].requiresGS() || Main.getGamestate() != null) {
+						if (!Menu.values[i].requiresGS() || Main.getGamestate() != null) {
 							selected = i;
 							break;
 						}
 					}
 				} else if (Keyboard.getEventKey() == Keyboard.KEY_S) {
-					for (int i = selected + 1; i < Menu.values().length; i++) {
-						if (!Menu.values()[i].requiresGS() || Main.getGamestate() != null) {
+					for (int i = selected + 1; i < Menu.values.length; i++) {
+						if (!Menu.values[i].requiresGS() || Main.getGamestate() != null) {
 							selected = i;
 							break;
 						}
 					}
 				} else if (Keyboard.getEventKey() == Keyboard.KEY_RETURN) {
-					Menu.values()[selected].createNew();
+					Menu.values[selected].createNew();
 				}
 			}
 		}

@@ -37,8 +37,10 @@ public enum RenderPriority {
 		return id;
 	}
 
+	public static RenderPriority[] values = values();
+	
 	public static RenderPriority getRenderPriorityFromId(int id) {
-		for (RenderPriority rp : values()) {
+		for (RenderPriority rp : values) {
 			if (rp.getId() == id) {
 				return rp;
 			}

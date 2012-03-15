@@ -17,6 +17,8 @@ public enum Menu {
 	private String text;
 	private boolean requiresGS;
 	
+	public static Menu[] values = values();
+	
 	private Menu(Class<? extends Screen> clazz, String text, boolean requiresGS) {
 		this.clazz = clazz;
 		this.text = text;

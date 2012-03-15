@@ -39,6 +39,7 @@ public class Main {
 		while (!Display.isCloseRequested()) {
 			currentScreen.draw();
 			Display.update();
+			Display.sync(30);
 		}
 		
 		Display.destroy();
